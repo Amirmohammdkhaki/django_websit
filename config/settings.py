@@ -134,3 +134,4 @@ LOGOUT_REDIRECT_URL = 'home'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"  # Add this
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Remove the comma after this line
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    
