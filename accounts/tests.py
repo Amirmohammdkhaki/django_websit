@@ -102,8 +102,8 @@ class AuthViewsTest(TestCase):
         response = self.client.get(self.signup_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/signup.html')
-        self.assertContains(response, 'username')  # بررسی وجود فیلد username
-        self.assertContains(response, 'password1')  # بررسی وجود فیلد password
+        self.assertContains(response, 'username')
+        self.assertContains(response, 'password1')
 
     def test_signup_view_post_success(self):
         response = self.client.post(self.signup_url, {
@@ -120,8 +120,8 @@ class AuthViewsTest(TestCase):
         response = self.client.get(self.login_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/login.html')
-        self.assertContains(response, 'username')  # بررسی وجود فیلد username
-        self.assertContains(response, 'password')  # بررسی وجود فیلد password
+        self.assertContains(response, 'username')
+        self.assertContains(response, 'password')
 
     def test_login_view_post_success(self):
         response = self.client.post(self.login_url, {
@@ -137,7 +137,7 @@ class AuthViewsTest(TestCase):
             'password': 'wrongpassword'
         })
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'error')  # بررسی وجود پیغام خطا
+        self.assertContains(response, 'Please enter a correct username and password')
 
     def test_logout_view(self):
         self.client.login(username='testuser', password='testpass123')
@@ -149,13 +149,13 @@ class AuthViewsTest(TestCase):
         self.client.login(username='testuser', password='testpass123')
         response = self.client.get(self.home_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'testuser')  # بررسی نمایش نام کاربری
+        self.assertContains(response, 'testuser')
 
     def test_home_view_unauthenticated(self):
         response = self.client.get(self.home_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'login')  # بررسی وجود لینک login
-        self.assertContains(response, 'signup')  # بررسی وجود لینک signup
+        self.assertContains(response, 'login')
+        self.assertContains(response, 'signup')
 
 class CustomUserAdminTest(TestCase):
     def setUp(self):

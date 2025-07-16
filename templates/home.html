@@ -17,7 +17,8 @@
             </form>
         </h3>
     {% else %}
-        <a href="{% url 'login' %}">Login</a> 
-        |<a href="{% url 'signup' %}"> Sign Up</a>
+    <div><a href="{% url 'login' %}">Login</a>
+        |<a href="{% url 'signup' %}"> Sign Up</a></div>
+        
     {% endif %}
 {% endblock %}
