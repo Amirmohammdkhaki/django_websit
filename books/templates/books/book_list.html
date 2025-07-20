@@ -3,20 +3,22 @@
 {% block page_title %}لیست کتاب‌ها{% endblock %}
 
 {% block content %}
+    {% csrf_token %}
     {% for book in books %}
-    <a href="{{ book.get_absolute_url }}"><h2>{{ book.title }}</h2></a>
-    <p>{{ book.description }}</p>
-    <hr>
+        <h3>{{ book.title }}</h3>
+        <p>نویسنده: {{ book.author }}</p>
+        <p>قیمت: {{ book.price }} تومان</p>
+        
+        <div>
+            <a href="{% url 'book_update' book.id %}"><button>ویرایش</button></a>
+            <a href="{% url 'book_delete' book.id %}"><button>حذف</button></a>
+        </div>
+        <hr>
+    {% empty %}
+        <p>هیچ کتابی وجود ندارد</p>
     {% endfor %}
 
-    <div style="margin-top: 30px;">
-        <a href="{% url 'book_create' %}" style="display: inline-block; 
-                padding: 8px 16px; 
-                background-color: #4CAF50; 
-                color: white; 
-                text-decoration: none; 
-                border-radius: 4px;">
-            + افزودن کتاب جدید
-        </a>
+    <div>
+        <a href="{% url 'book_create' %}"><button>کتاب جدید +</button></a>
     </div>
-{% endblock %} 
+{% endblock %}
