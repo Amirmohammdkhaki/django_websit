@@ -1,19 +1,22 @@
 {% extends "_base.html" %}
 
-
-{% block page_title %}
-    لیست کتاب
-{% endblock page_title %}
-
-
+{% block page_title %}لیست کتاب‌ها{% endblock %}
 
 {% block content %}
     {% for book in books %}
-    <a href="{{book.get_absolute_url}}"><h1>{{book.title}}</h1></a>
-    
-    <p> {{book.description}} </p>
-      
+    <a href="{{ book.get_absolute_url }}"><h2>{{ book.title }}</h2></a>
+    <p>{{ book.description }}</p>
+    <hr>
     {% endfor %}
-{% endblock  %}
-    
-    
+
+    <div style="margin-top: 30px;">
+        <a href="{% url 'book_create' %}" style="display: inline-block; 
+                padding: 8px 16px; 
+                background-color: #4CAF50; 
+                color: white; 
+                text-decoration: none; 
+                border-radius: 4px;">
+            + افزودن کتاب جدید
+        </a>
+    </div>
+{% endblock %} 

@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+
+{% block page_title %}افزودن کتاب جدید{% endblock %}
+
+{% block content %}
+    <h2>کتاب جدید</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ذخیره</button>
+    </form>
+    <a href="{% url 'book_list' %}">انصراف</a>
+{% endblock %}
