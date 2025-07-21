@@ -1,19 +1,15 @@
 {% extends "_base.html" %}
 
-{% block page_title %}{{ book.title }} - جزئیات کتاب{% endblock %}
+{% block title %}{{ book.title }} - جزئیات{% endblock %}
 
 {% block content %}
-    {% csrf_token %}
+    <h1>{{ book.title|capfirst }}</h1>
+    <p><b>نویسنده:</b> {{ book.author }}</p>
+    <p><b>توضیحات:</b> {{ book.description }}</p>
+    <p><b>قیمت:</b> {{ book.price }} تومان</p>
     
     <div>
-        <h1>{{ book.title }}</h1>
-        <p><b>نویسنده:</b> {{ book.author }}</p>
-        <p><b>توضیحات:</b> {{ book.description }}</p>
-        <p><b>قیمت:</b> {{ book.price }} تومان</p>
-        
-        <div style="margin-top: 20px;">
-            <a href="{% url 'book_list' %}" class="btn btn-secondary">بازگشت به لیست</a>
-            <a href="{% url 'book_update' book.id %}" class="btn btn-primary">ویرایش کتاب</a>
-        </div>
+        <a href="{% url 'book_list' %}"><button>بازگشت</button></a>
+        <a href="{% url 'book_update' book.id %}"><button>ویرایش</button></a>
     </div>
 {% endblock %}
