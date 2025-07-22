@@ -1,15 +1,45 @@
 {% extends "_base.html" %}
-
-{% block title %}{{ book.title }} - جزئیات{% endblock %}
+{% block page_title %}{{ book.title }} - جزئیات{% endblock %}
 
 {% block content %}
-    <h1>{{ book.title|capfirst }}</h1>
-    <p><b>نویسنده:</b> {{ book.author }}</p>
-    <p><b>توضیحات:</b> {{ book.description }}</p>
-    <p><b>قیمت:</b> {{ book.price }} تومان</p>
-    
-    <div>
-        <a href="{% url 'book_list' %}"><button>بازگشت</button></a>
-        <a href="{% url 'book_update' book.id %}"><button>ویرایش</button></a>
+<div class="container mt-5" dir="rtl">
+    <div class="row justify-content-center w-sm-75 w-100 mx-auto">
+        <div class="col-md-3 text-center">
+            <img src="{{ book.cover_url }}" alt="{{ book.title }}" class="img-fluid rounded" style="max-height: 240px;">
+        </div>
+        <div class="col-md-6 text-end">
+            <h1>{{ book.title }}</h1>
+            <h5 class="text-muted">نویسنده: {{ book.author }}</h5>
+            <p>{{ book.description|truncatewords:35 }}</p>
+        </div>
+        <div class="col-md-3 text-end">
+            <h3 class="text-muted pt-2">{{ book.price }} تومان</h3>
+        </div>
     </div>
+
+    <div class="my-4 p-4 bg-light rounded w-sm-75 w-100 mx-auto">
+        <p>{{ book.description }}</p>
+    </div>
+
+    <div class="card shadow my-3 p-5 w-sm-75 w-100 mx-auto">
+        <h2 class="mb-4">نظرات کاربران:</h2>
+        {% for comment in book.comments.all %}
+            <div class="border-bottom mb-3">
+                <h5>{{ comment.author_name }}</h5>
+                <p>{{ comment.text }}</p>
+            </div>
+        {% empty %}
+            <p>هنوز نظری ثبت نشده است.</p>
+        {% endfor %}
+    </div>
+
+    <div class="card shadow my-3 p-5 w-sm-75 w-100 mx-auto">
+        <h3>ارسال نظر جدید:</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">ارسال</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

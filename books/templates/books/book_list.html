@@ -3,24 +3,35 @@
 {% block page_title %}لیست کتاب‌ها{% endblock %}
 
 {% block content %}
-    {% for book in books %}
-        <div>
-            <h2><a href="{{ book.get_absolute_url }}">{{ book.title|capfirst }}</a></h2>
-            <p>نویسنده: {{ book.author|capfirst }}</p>
-             <p>{{ book.description|truncatewords:45 }}</p>
-            <p>قیمت: {{ book.price }} تومان</p>
-            
-            <p>
-                <a href="{% url 'book_update' book.id %}"><button>ویرایش</button></a>
-                <a href="{% url 'book_delete' book.id %}"><button>حذف</button></a>
-            </p>
-            <hr>
-        </div>
-    
-    {% endfor %}
-
-    <div>
-        <a href="{% url 'book_create' %}"><button>+ افزودن کتاب جدید</button></a>
+<div class="container mt-4">
+    <div class="row flex-row-reverse justify-content-md-center">
+        {% for book in books %}
+            <div class="card m-2" style="max-width: 45%; min-height: 280px;">
+                <div class="row g-0 h-100" dir="rtl">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                        <img src="https://www.iranketab.ir/Images/ProductImages/Thumbs/d3d526cd2eb5426ea35a5f13fd49b936.jpg"
+                             alt="..."
+                             style="width: 100%; max-width: 180px; height: auto; border-radius: 0.5rem; object-fit: cover;">
+                    </div>
+                    <div class="col-md-8 h-100">
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="card-body">
+                                <a href="{{book.get_absolute_url}}"><h3 class="card-title"><strong>{{ book.title }}</strong></h3></a>
+                                
+                                <p class="card-text pt-3"><strong>📖 توضیحات:</strong> {{ book.description|truncatewords:35 }}</p>
+                                <p class="text-muted">نویسنده: {{ book.author }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-{% endblock %}
+</div>
 
+<footer class="bg-light text-center text-lg-start mt-5">
+    <div class="text-center bg-grey">
+        <p>دوره آموزشی جنگو <a class="text-dark" href="https://codingyar.com/" target="_blank">کدینگ یار</a></p>
+    </div>
+</footer>
+{% endblock %}
