@@ -1,0 +1,59 @@
+/* دکمه‌های سبز */
+.btn-login,
+.btn-signup,
+.btn-logout {
+    padding: 0.4rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    color: white !important;
+}
+
+/* دکمه ورود */
+.btn-login {
+    background-color: #2E7D32; /* سبز تیره */
+}
+
+.btn-login:hover {
+    background-color: #1B5E20;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* دکمه ثبت‌نام */
+.btn-signup {
+    background-color: #4CAF50; /* سبز متوسط */
+}
+
+.btn-signup:hover {
+    background-color: #3E8E41;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* دکمه خروج */
+.btn-logout {
+    background-color: #81C784; /* سبز روشن */
+    padding: 0.4rem 1rem;
+}
+
+.btn-logout:hover {
+    background-color: #66BB6A;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+/* متن خوش آمدگویی */
+.welcome-message {
+    color: white;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}

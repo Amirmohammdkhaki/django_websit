@@ -1,0 +1,67 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}افزودن کتاب جدید{% endblock %}
+
+{% block content %}
+<div class="container mt-4" dir="rtl">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow my-3">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">فرم افزودن کتاب جدید</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                        <div class="form-group mb-3">
+                            <label for="cover" class="form-label">تصویر جلد کتاب:</label>
+                            <input type="file" class="form-control" name="cover" id="cover" accept="image/*">
+                            <small class="text-muted">فرمت‌های مجاز: webp,JPG, PNG, JPEG - حداکثر حجم: 2MB</small>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-save me-2"></i>ذخیره کتاب
+                            </button>
+                            <a href="{% url 'book_list' %}" class="btn btn-secondary px-4">
+                                <i class="fas fa-times me-2"></i>انصراف
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card shadow my-3">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0">راهنمای افزودن کتاب</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="fas fa-info-circle text-primary me-2"></i>
+                            تمام فیلدهای ضروری را پر کنید
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-image text-primary me-2"></i>
+                            تصویر جلد باید با کیفیت و خوانا باشد
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-book text-primary me-2"></i>
+                            توضیحات باید حداقل 50 کاراکتر داشته باشد
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-money-bill-wave text-primary me-2"></i>
+                            قیمت را به تومان وارد کنید
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

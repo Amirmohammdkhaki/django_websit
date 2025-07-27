@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+{% block title %}ویرایش کتاب{% endblock %}
+
+{% block content %}
+    <h2>ویرایش کتاب</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- نمایش تصویر فعلی -->
+        {% if form.instance.cover %}
+            <div class="mb-3">
+                <label>تصویر فعلی:</label>
+                <img src="{{ form.instance.cover.url }}" class="img-thumbnail" width="150">
+            </div>
+        {% endif %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn btn-primary">ذخیره</button>
+        <a href="{% url 'book_list' %}" class="btn btn-secondary">انصراف</a>
+    </form>
+{% endblock %}

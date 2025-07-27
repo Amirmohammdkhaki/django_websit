@@ -1,0 +1,49 @@
+{% extends "_base.html" %}
+
+{% block page_title %}لیست کتاب‌ها{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row flex-row-reverse">
+        {% for book in books %}
+            <div class="card m-2" style="max-width: 45%; min-height: 280px;">
+                <div class="row g-0 h-100" dir="rtl">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-2">
+                        {% if book.cover %}
+                            <img  src="{{ book.cover.url }}" 
+                                 alt="جلد کتاب {{ book.title }}"
+                                 class="img-fluid"
+                                 style="width: 100%; max-width: 180px; height: auto; border-radius: 0.5rem; object-fit: cover;">
+                        {% else %}
+                            <div class="d-flex align-items-center justify-content-center bg-light" 
+                                 style="width: 100%; max-width: 180px; height: 180px; border-radius: 0.5rem;">
+                                <span class="text-muted">بدون تصویر</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 h-100">
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="card-body">
+                                <a class="text-decoration-none" href="{{book.get_absolute_url}}">
+                                    <h3 class="card-title"><strong>{{ book.title }}</strong></h3>
+                                </a>
+                                <p class="card-text pt-3"><strong>📖 توضیحات:</strong> {{ book.description|truncatewords:30}}</p>
+                                <p class="text-muted">نویسنده: {{ book.author }}</p>
+                                <p class="text-success">قیمت: {{ book.price }} تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<footer class="bg-light text-center text-lg-start mt-5">
+    <div class="text-center bg-grey py-3">
+        <a class="text-dark" href="https://instagram.com/amirrmw" target="_blank">
+            اینستاگرام 
+        </a>
+    </div>
+</footer>
+{% endblock %}
