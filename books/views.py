@@ -2,20 +2,52 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Books
 from django.urls import reverse_lazy, reverse
+from django.shortcuts import get_object_or_404
+from .forms import CommentForm
 
 class BookListView(generic.ListView):
     model = Books
+    paginate_by=6
+    allow_empty = True
     template_name = 'books/book_list.html'
     context_object_name = 'books'
 
+def book_detail_view(request, pk):
+    book = get_object_or_404(Books, pk=pk)
+    comments = book.comments.all().order_by('-datatime_created')  
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.book = book
+            new_comment.user = request.user  
+            new_comment.save()
+            comment_form = CommentForm()  
+    
+    
+        
+    else:
+        comment_form = CommentForm()
+
+
+    return render(request, 'books/book_detail.html', {
+        'book': book,
+        'comments': comments,
+        'comment_form': comment_form,  
+    })
+
+
+    
 
 
 
 
-class BookDetailView(generic.DetailView):
-    model = Books
-    template_name = 'books/book_detail.html'
-    context_object_name = 'book'
+
+# class BookDetailView(generic.DetailView):
+#     model = Books
+#     template_name = 'books/book_detail.html'
+#     context_object_name = 'book'
 
 
 

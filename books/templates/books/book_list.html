@@ -4,16 +4,17 @@
 
 {% block content %}
 <div class="container mt-4">
+    {% if books %}
     <div class="row flex-row-reverse">
         {% for book in books %}
             <div class="card m-2" style="max-width: 45%; min-height: 280px;">
                 <div class="row g-0 h-100" dir="rtl">
                     <div class="col-md-4 d-flex align-items-center justify-content-center p-2">
                         {% if book.cover %}
-                            <img  src="{{ book.cover.url }}" 
+                            <img src="{{ book.cover.url }}" 
                                  alt="جلد کتاب {{ book.title }}"
                                  class="img-fluid"
-                                 style="width: 100%; max-width: 180px; height: auto; border-radius: 0.5rem; object-fit: cover;">
+                                 style="width: 180%; max-width: 170px; height: auto; border-radius: 0.5rem; object-fit: cover;">
                         {% else %}
                             <div class="d-flex align-items-center justify-content-center bg-light" 
                                  style="width: 100%; max-width: 180px; height: 180px; border-radius: 0.5rem;">
@@ -37,6 +38,37 @@
             </div>
         {% endfor %}
     </div>
+
+    <!-- صفحه‌بندی صحیح -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                </li>
+            {% endif %}
+            
+            <li class="page-item active">
+                <span class="page-link">
+                    صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+    {% else %}
+    <div class="alert alert-info text-center py-4">
+        <p>کتابی برای نمایش وجود ندارد</p>
+        <a href="{% url 'book_create' %}" class="btn btn-primary">اضافه کردن کتاب جدید</a>
+    </div>
+    {% endif %}
 </div>
 
 <footer class="bg-light text-center text-lg-start mt-5">
